@@ -2,17 +2,22 @@
 
 <div class="col-md-3">
 <h3><%= @place.name %></h3>
-<p><strong>Address</strong><%= @place.address %></p>
-<p><strong>Phone</strong><%= @place.phone %></p>
-<p><strong>Website</strong><%= @place.website %></p>
-<p><strong>Description</strong><%= @place.description %></p>
+<p><strong>Address </strong><%= @place.address %></p>
+<p><strong>Phone </strong><%= @place.phone %></p>
+<p><strong>Website </strong><%= @place.website %></p>
+<p><strong>Description </strong><%= @place.description %></p>
 
 <div id="map" style ="width: 230px; height: 230px;"></div>
 </div>
 
 <div class="col-md-9">
 <h3>Reviews by People</h3>
-
+<h5>New Review</h5>
+<% if current_user %>
+<%= render "reviews/form" %>
+<h5>All Reviews</h5>
+<%= render @reviews %>
+<% end %>
 </div>
 
 </div>
