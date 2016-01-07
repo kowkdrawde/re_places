@@ -2,6 +2,7 @@
 
 <div class="col-md-3">
 <h3><%= @place.name %></h3>
+<div class="average_rating"></div>
 <p><strong>Address </strong><%= @place.address %></p>
 <p><strong>Phone </strong><%= @place.phone %></p>
 <p><strong>Website </strong><%= @place.website %></p>
@@ -21,7 +22,7 @@
 
 </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 var mycenter = { lat: <%= @place.latitude %>, lng: <%= @place.longitude %> }
 var map;
 function initMap() {
@@ -34,4 +35,12 @@ var marker = new google.maps.Marker({
   map: map
 });
 }
-     </script>
+
+  $(".average_rating").raty({
+  starOn: "<%= image_path('star-on.png') %>",
+  starOff: "<%= image_path('star-off.png') %>",
+  score: <%= @place.average_rating %>,
+  readOnly: true
+  });
+  
+  </script>
