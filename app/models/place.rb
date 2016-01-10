@@ -12,4 +12,13 @@ class Place < ActiveRecord::Base
       0
   end
 
+  def self.search(search)
+    if search
+      where(['name LIKE ? OR address LIKE ?', "#{search}", "#{search}"])
+    else
+      all
+    end
+  end
+
+
 end
