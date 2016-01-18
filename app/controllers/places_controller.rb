@@ -5,13 +5,13 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.search(params[:search])
+    @places = Place.search(params[:search]).paginate(page: params[:places_page], per_page: 10)
   end
 
   # GET /places/1
   # GET /places/1.json
   def show
-    @reviews = @place.reviews
+    @reviews = @place.reviews.paginate(page: params[:reviews_page], per_page: 10)
     @review = Review.new
   end
 

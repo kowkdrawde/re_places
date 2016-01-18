@@ -4,9 +4,12 @@ class Review < ActiveRecord::Base
   validates :content, :score, presence: true
 
   after_save :update_average
+  after_destroy :update_average
+  
   
   def update_average
     a = self.place.cal_average_rating
     self.place.update_attributes(average_rating: a)
   end
+
 end

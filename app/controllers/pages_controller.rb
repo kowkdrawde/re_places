@@ -7,8 +7,8 @@ class PagesController < ApplicationController
 
   def dashboard
     @user = current_user
-    @places = @user.places
-    @reviews = @user.reviews
+    @places = @user.places.paginate(page: params[:places_page], per_page: 10)
+    @reviews = @user.reviews.paginate(page: params[:reviews_page], per_page: 10)
   end
 
 end

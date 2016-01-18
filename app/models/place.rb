@@ -1,10 +1,11 @@
 class Place < ActiveRecord::Base
   belongs_to :user
   has_many :reviews, dependent: :destroy
-  validates :name, :phone, :address, :website, :user_id, presence: true
+  validates :name, :address, :user_id, presence: true
 
-  geocoded_by :address
   after_validation :geocode
+  geocoded_by :address
+  
 
   def cal_average_rating
     (self.reviews.sum(:score) / reviews.size.to_f).round

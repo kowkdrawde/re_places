@@ -1,6 +1,9 @@
 <table>
 <td><%= gravatar_tag review.user.email, size: 20 %> <%= review.content %> by <%= review.user.name %>&nbsp;&nbsp;</td>
 <td><div class="score_<%= review.id %>"></div></td>
+<% if review.user == current_user %>
+<td>&nbsp;&nbsp;<%= link_to "Edit", edit_review_path(review) %> | <%= link_to "Destroy", review_path(review), method: :delete %></td>
+<% end %>
 </table>
 
 <script>

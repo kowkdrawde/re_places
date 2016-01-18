@@ -7,22 +7,38 @@
       <th>Address</th>
       <th>Phone</th>
       <th>Website</th>
+      <th>Average</th>
+      <th>Reviews</th>
     </tr>
   </thead>
 
   <tbody>
     <% @places.each do |place| %>
       <tr>
-        <td><%= place.name %></td>
+        <td><%= link_to place.name, place_path(place), "data-no-turbolink" => true %></td>
         <td><%= place.address %></td>
         <td><%= place.phone %></td>
-        <td><%= place.website %></td>
+        <td><%= link_to place.website, "http://#{place.website}" %></td>
+        <td><div class="place_score_<%= place.id %>"></div></td>
+        <td><%= place.reviews.count %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= render "layouts/paginate", table: @places, table_page: 'places_page' %>
 
 <br>
 <% if current_user %>
 <%= link_to 'New Place', new_place_path %>
 <% end %>
+
+    <script>
+    <% @places.each do |place| %>
+    $(".place_score_<%= place.id %>").raty({
+    starOn: "<%= image_path('star-on.png') %>",
+    starOff: "<%= image_path('star-off.png') %>",
+    score: <%= place.average_rating %>,
+    readOnly: true
+    });
+   <% end %>
+    </script>
